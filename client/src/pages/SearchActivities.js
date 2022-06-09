@@ -1,6 +1,8 @@
-import React from 'react'
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-import { style, styled } from '@mui/system';
+import React from "react";
+import ButtonUnstyled, {
+  buttonUnstyledClasses,
+} from "@mui/base/ButtonUnstyled";
+import { style, styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 // import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -11,13 +13,13 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useMutation, useLazyQuery, gql } from "@apollo/client";
-import { ACTIVITY_CITY } from '../utils/queries'
+import { ACTIVITY_CITY } from "../utils/queries";
 // import { ADD_ACTIVITY } from "../utils/mutations";
 
 const blue = {
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0059B2',
+  500: "#007FFF",
+  600: "#0072E5",
+  700: "#0059B2",
 };
 
 const CustomButton = styled(ButtonUnstyled)`
@@ -41,38 +43,36 @@ const CustomButton = styled(ButtonUnstyled)`
   }
 
   &.${buttonUnstyledClasses.focusVisible} {
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
+    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1),
+      0 0 0 5px rgba(0, 127, 255, 0.5);
     outline: none;
   }
-
 `;
 
 const styles = {
   mainStyles: {
-    textAlign: 'center'
+    textAlign: "center",
   },
   // formStyles: {
   //   margin: '10px',
   //   display: 'block',
   // },
   labelStyles: {
-    display: 'flex',
-    justifyContent: 'center',
-
+    display: "flex",
+    justifyContent: "center",
   },
   inputStyles: {
-    padding: '12px 20px'
+    padding: "12px 20px",
   },
   buttonStyles: {
-    paddingTop: '1rem'
-  }
-
+    paddingTop: "1rem",
+  },
 };
 
 const eventStyle = {
   // display: 'felx',
-  width: '24%'
-}
+  width: "24%",
+};
 
 const bull = (
   <Box
@@ -83,34 +83,26 @@ const bull = (
   </Box>
 );
 
-
-
 export default function Home() {
-
   // const [activity, { error }] = useMutation(ADD_ACTIVITY);
 
-  const [searchedEvents, setSearchedEvents] = React.useState('')
-  const [searchedLocation, setSearchedLocation] = React.useState('')
-  const [gql, setGql] = React.useState([])
+  const [searchedEvents, setSearchedEvents] = React.useState("");
+  const [searchedLocation, setSearchedLocation] = React.useState("");
+  const [activities, setActivities] = React.useState([]);
 
-  const [activitiesByActivityCity, { called, data, loading }] = useLazyQuery(ACTIVITY_CITY);
+  const [activitiesByActivityCity, { called, data, loading }] =
+    useLazyQuery(ACTIVITY_CITY);
 
-
-  const handleChange = e => {
-    if (e.target.name === 'searchedEvents') {
+  const handleChange = (e) => {
+    if (e.target.name === "searchedEvents") {
       console.log(e.target.value);
-      setSearchedEvents(e.target.value)
-    } else if (e.target.name === 'searchedLocation') {
+      setSearchedEvents(e.target.value);
+    } else if (e.target.name === "searchedLocation") {
       console.log(e.target.value);
-      setSearchedLocation(e.target.value)
+      setSearchedLocation(e.target.value);
     }
     // console.log(e.target.id);
   };
-
-
-
-
-
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -122,17 +114,11 @@ export default function Home() {
           activity: searchedEvents,
         },
       });
-      debugger;
-      setGql(data.activitiesByActivityCity);
+      setActivities(data.activitiesByActivityCity);
     } catch (error) {
       console.log(error);
     }
-  }
-
-
-
-
-
+  };
 
   return (
     <div className="App">
@@ -156,8 +142,8 @@ export default function Home() {
                   <TextField
                     {...params}
                     label="Search Events"
-                    id='activityID'
-                    name='searchedEvents'
+                    id="activityID"
+                    name="searchedEvents"
                     // value={searchedEvents}
                     onChange={handleChange}
                     InputProps={{
@@ -183,9 +169,9 @@ export default function Home() {
                   <TextField
                     {...params}
                     label="Search Location"
-                    id='locationID'
+                    id="locationID"
                     // value={searchedLocation}
-                    name='searchedLocation'
+                    name="searchedLocation"
                     onChange={handleChange}
                     InputProps={{
                       ...params.InputProps,
@@ -195,25 +181,31 @@ export default function Home() {
                 )}
               />
             </label>
-            <CustomButton type='submit' >Search</CustomButton>
+            <CustomButton type="submit">Search</CustomButton>
           </form>
 
-
-
-          <container style={{ display: 'flex', margin: '0 auto', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <h2>{gql.length ? `Viewing ${gql.length} results:` : ""}</h2>
-            {gql.map((e) => {
+          <container
+            style={{
+              display: "flex",
+              margin: "0 auto",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h2>{activities.length ? `Viewing ${activities.length} results:` : ""}</h2>
+            {activities.map((e) => {
               return (
                 <Card
                   sx={{
                     border: "2px solid black",
                     width: "25%",
                     display: "flex",
-                    flexWrap: 'wrap',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    margin: '5px'
+                    flexWrap: "wrap",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    margin: "5px",
                   }}
                 >
                   <CardContent>
@@ -239,7 +231,7 @@ export default function Home() {
                     {/* <Button size="small">Learn More</Button> */}
                   </CardActions>
                 </Card>
-              )
+              );
             })}
           </container>
         </main>
@@ -247,7 +239,6 @@ export default function Home() {
     </div>
   );
 }
-
 
 const eventList = [
   { activity: "Hiking" },
