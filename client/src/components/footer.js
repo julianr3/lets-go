@@ -21,7 +21,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 // import MessageIcon from '@mui/icons-material/Message'
 import { Link } from "react-router-dom";
-import './footer.css'
+import './assets/css/footer.css'
 
 const styles = {
   footerStyle: {
@@ -36,7 +36,7 @@ const styles = {
   },
 };
 
-
+// imported "LabelBottomNavigation" to App.js page line 14
 export default function LabelBottomNavigation() {
   const [value, setValue] = React.useState('recents');
 
