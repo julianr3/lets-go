@@ -15,6 +15,7 @@ import Modal from "@mui/material/Modal";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import Auth from "../utils/auth";
+import { disableFragmentWarnings } from "@apollo/client";
 
 
 export default function Navbar() {
@@ -29,7 +30,7 @@ export default function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: "yellow !important" }}>
                 <Toolbar>
                     <svg fill="#993399" width="100pt" height="100pt" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                         <g>
