@@ -46,18 +46,24 @@ export default function LabelBottomNavigation() {
 
   return (
     <div>
-      <div className='copyright'>
-      <div className='letters'>© 2022 Let's Go All Rights Reserved </div> 
+      <div className="copyright">
+        <div className='letters'>© 2022 Let's Go All Rights Reserved </div> 
       </div>
-    <BottomNavigation style={styles.footerStyle} sx={{ width: 500 }} value={value} onChange={handleChange}>
-      <BottomNavigationAction
-        color="primary"
-        label="Contact Support"
-        value="Support"
-        component={Link} to='/support'
-        icon={<ContactSupportIcon />}
-      />
-    </BottomNavigation>
+      <BottomNavigation
+        style={styles.footerStyle}
+        sx={{ width: 500 }}
+        value={value}
+        onChange={handleChange}
+      >
+        <BottomNavigationAction
+          color="primary"
+          label="Contact Support"
+          value="Support"
+          component={Link}
+          to="/support"
+          icon={<ContactSupportIcon />}
+        />{" "}
+      </BottomNavigation>
     </div>
   );
 }
