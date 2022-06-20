@@ -6,14 +6,7 @@ import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import "./assets/css/ContactSupport.css";
 
-export default function Contact() {
-    // const styles = {
-    //     formStyle: {
-    //       justifyContent: 'center',
-    //       color: 'white',
-    //       textAlign: 'center'
-    //     },
-    //   };
+export default function ContactSupport() {
 
     const form = useRef();
 
