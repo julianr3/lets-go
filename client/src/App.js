@@ -52,7 +52,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<SearchActivities />} />
               {/* <Route path="/profile" element={<ProfilePage />} /> */}
-              {/* <Route path="/support" element={<ContactSupport />} /> */}
+              <Route path="/support" element={<ContactSupport />} />
               {/* <Route path="*" element={<h1 className="display-2">Wrong page!</h1>} /> */}
 
               {/* <Route path="/old-home" element={<Home />} /> */}
