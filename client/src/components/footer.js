@@ -21,7 +21,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 // import MessageIcon from '@mui/icons-material/Message'
 import { Link } from "react-router-dom";
-import './footer.css'
+import './assets/css/footer.css'
 
 const styles = {
   footerStyle: {
@@ -36,7 +36,7 @@ const styles = {
   },
 };
 
-
+// imported "LabelBottomNavigation" to App.js page line 14
 export default function LabelBottomNavigation() {
   const [value, setValue] = React.useState('recents');
 
@@ -46,18 +46,24 @@ export default function LabelBottomNavigation() {
 
   return (
     <div>
-      <div className='copyright'>
-      <div className='letters'>© 2022 Let's Go All Rights Reserved </div> 
+      <div className="copyright">
+        <div className='letters'>© 2022 Let's Go All Rights Reserved </div> 
       </div>
-    <BottomNavigation style={styles.footerStyle} sx={{ width: 500 }} value={value} onChange={handleChange}>
-      <BottomNavigationAction
-        color="primary"
-        label="Contact Support"
-        value="Support"
-        component={Link} to='/support'
-        icon={<ContactSupportIcon />}
-      />
-    </BottomNavigation>
+      <BottomNavigation
+        style={styles.footerStyle}
+        sx={{ width: 500 }}
+        value={value}
+        onChange={handleChange}
+      >
+        <BottomNavigationAction
+          color="primary"
+          label="Contact Support"
+          value="Support"
+          component={Link}
+          to="/support"
+          icon={<ContactSupportIcon />}
+        />{" "}
+      </BottomNavigation>
     </div>
   );
 }

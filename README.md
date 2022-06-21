@@ -37,9 +37,7 @@ Emailjs
 
 ## Usage
 
-Below is a screenshot of the application homepage:
-
-<!-- ![photo of homepage](/public/images/.jpg) -->
+https://boiling-lake-30769.herokuapp.com/
 
 ## Credits
 

@@ -1,31 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import { setContext } from "@apollo/client/link/context";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Import the Apollo client wrapper
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Import pages and components
+import SearchActivities from "./pages/SearchActivities";
+import ProfilePage from "./pages/ProfilePage";
+import ContactSupport from "./pages/ContactSupport";
+import Navbar from "./components/Navbar";
+import LabelBottomNavigation from "./components/footer.js";
+
+// TODO - Remove after refactor is complete
 import Home from "./components/homePage";
-import Footer from "./components/footer.js";
-import Header from "./components/header.js";
-import Support from "./components/contactSupport";
+
+import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
+import lightTheme from "../src/components/assets/css/lightTheme";
+import darkTheme from "../src/components/assets/css/darkTheme";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -37,31 +49,33 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-  return (
+  const [theme, setTheme] = useState(darkTheme);
 
+  // let handleClick = () => {
+  //   theme === darkTheme ? setTheme(lightTheme) : setTheme(darkTheme);
+  // };
+
+  return (
+    // Wrap everything in the ApolloProvider and client being passed in a `props`
     <ApolloProvider client={client}>
-      <div>
+      {/* <ThemeProvider theme={theme}> */}
       <Router>
-        <div>
-          <Header />
-          <div>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              {/* <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/me" element={<Profile />} />
-                <Route path="/profiles/:username" element={<Profile />} />
-                <Route
-                  path="/thoughts/:thoughtId"
-                  element={<SingleThought />}
-              /> */}
-              <Route path="/support" element={<Support />} />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
+        <>
+          <ThemeProvider theme={theme}>
+            <Navbar />
+          </ThemeProvider>
+          <Routes>
+            <Route path="/" element={<SearchActivities />} />
+            {/* <Route path="/profile" element={<ProfilePage />} /> */}
+            {/* <Route path="/support" element={<ContactSupport />} /> */}
+            {/* <Route path="*" element={<h1 className="display-2">Wrong page!</h1>} /> */}
+
+            {/* <Route path="/old-home" element={<Home />} /> */}
+          </Routes>
+          {/* changed component name from footer to LabelBottomNavigation */}
+          <LabelBottomNavigation />
+        </>
       </Router>
-    </div>
-      </ApolloProvider >
+    </ApolloProvider>
   );
 }
