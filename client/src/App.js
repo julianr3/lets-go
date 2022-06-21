@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 // Import the Apollo client wrapper
 import {
@@ -23,6 +24,7 @@ import Home from "./components/homePage";
 import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import lightTheme from "../src/components/assets/css/lightTheme";
 import darkTheme from "../src/components/assets/css/darkTheme";
+import { Paper } from "@mui/material";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -51,29 +53,32 @@ const client = new ApolloClient({
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
 
-  // let handleClick = () => {
-  //   theme === darkTheme ? setTheme(lightTheme) : setTheme(darkTheme);
-  // };
+  let handleClick = () => {
+    theme === darkTheme ? setTheme(lightTheme) : setTheme(darkTheme);
+  };
 
   return (
     // Wrap everything in the ApolloProvider and client being passed in a `props`
     <ApolloProvider client={client}>
-      {/* <ThemeProvider theme={theme}> */}
       <Router>
         <>
           <ThemeProvider theme={theme}>
-            <Navbar />
-          </ThemeProvider>
-          <Routes>
-            <Route path="/" element={<SearchActivities />} />
-            {/* <Route path="/profile" element={<ProfilePage />} /> */}
-            {/* <Route path="/support" element={<ContactSupport />} /> */}
-            {/* <Route path="*" element={<h1 className="display-2">Wrong page!</h1>} /> */}
+            <Paper style={{ height: "100vh" }}>
+              <Button aria-label="darkmode" onClick={handleClick}>
+                Mode
+              </Button>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<SearchActivities />} />
+                {/* <Route path="/profile" element={<ProfilePage />} /> */}
+                {/* <Route path="/support" element={<ContactSupport />} /> */}
+                {/* <Route path="*" element={<h1 className="display-2">Wrong page!</h1>} /> */}
 
-            {/* <Route path="/old-home" element={<Home />} /> */}
-          </Routes>
-          {/* changed component name from footer to LabelBottomNavigation */}
-          <LabelBottomNavigation />
+                {/* <Route path="/old-home" element={<Home />} /> */}
+              </Routes>
+              <LabelBottomNavigation />
+            </Paper>
+          </ThemeProvider>
         </>
       </Router>
     </ApolloProvider>
