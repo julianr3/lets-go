@@ -51,6 +51,7 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+
   const [theme, setTheme] = useState(darkTheme);
 
   let handleClick = () => {
@@ -73,6 +74,19 @@ export default function App() {
                 {/* <Route path="/profile" element={<ProfilePage />} /> */}
                 {/* <Route path="/support" element={<ContactSupport />} /> */}
                 {/* <Route path="*" element={<h1 className="display-2">Wrong page!</h1>} /> */}
+
+    return (
+      // Wrap everything in the ApolloProvider and client being passed in a `props`
+      <ApolloProvider client={client}>
+        <Router>
+          <>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<SearchActivities />} />
+              {/* <Route path="/profile" element={<ProfilePage />} /> */}
+              <Route path="/support" element={<ContactSupport />} />
+              {/* <Route path="*" element={<h1 className="display-2">Wrong page!</h1>} /> */}
+
 
                 {/* <Route path="/old-home" element={<Home />} /> */}
               </Routes>
